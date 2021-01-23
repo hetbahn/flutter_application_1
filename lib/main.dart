@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(fontFamily: 'Nunito'),
       home: HomePage(),
     ));
 
@@ -12,6 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   PageController _pageController;
+  int totalPage = 4;
 
   void _onScroll() {}
 
@@ -30,18 +32,33 @@ class _HomePageState extends State<HomePage> {
       body: PageView(
         controller: _pageController,
         children: <Widget>[
-          makePage(image: 'assets/images/one.jpg', title: '', description: ''),
-          makePage(image: 'assets/images/two.jpg', title: '', description: ''),
           makePage(
-              image: 'assets/images/three.jpg', title: '', description: ''),
-          makePage(image: 'assets/images/four.jpg', title: '', description: ''),
+            page: 1,
+            image: 'assets/images/one.jpg', 
+            title: 'Yosemite National Park', 
+            description: 'Yosemite National Park is in California’s Sierra Nevada mountains. It’s famed for its giant, ancient sequoia trees, and for Tunnel View, the iconic vista of towering Bridalveil Fall and the granite cliffs of El Capitan and Half Dome.'),
+          makePage(
+            page: 2,
+            image: 'assets/images/two.jpg', 
+            title: 'Golden Gate Bridge', 
+            description: 'The Golden Gate Bridge is a suspension bridge spanning the Golden Gate, the one-mile-wide strait connecting San Francisco Bay and the Pacific Ocean.'),
+          makePage(
+            page: 3,
+            image: 'assets/images/three.jpg', 
+            title: 'Sedona', 
+            description: "Sedona is regularly described as one of America's most beautiful places. Nowhere else will you find a landscape as dramatically colorful."),
+          makePage(
+            page: 4,
+            image: 'assets/images/four.jpg', 
+            title: 'Savannah', 
+            description: "Savannah, with its Spanish moss, Southern accents and creepy graveyards, is a lot like Charleston, South Carolina. But this city about 100 miles to the south has an eccentric streak."),
         ],
       ),
     );
   }
 }
 
-Widget makePage({image, title}) {
+Widget makePage({image, title, description, page}) {
   return Container(
     decoration: BoxDecoration(
         image: DecorationImage(
@@ -69,14 +86,14 @@ Widget makePage({image, title}) {
                 textBaseline: TextBaseline.alphabetic,
                 children: <Widget>[
                   Text(
-                    '1',
+                    page.toString(),
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 30,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    '/4',
+                    '/' + totalPage.toString(),
                     style: TextStyle(color: Colors.white, fontSize: 15),
                   )
                 ],
@@ -151,7 +168,13 @@ Widget makePage({image, title}) {
                     SizedBox(
                       height: 20,
                     ),
-                    Text(description)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 50),
+                      child: Text(description, style: TextStyle(color: Colors.white.withOpacity(.7), height: 1.9, fontSize: 15))
+                    ),
+                    SizedBox(height: 20,),
+                    Text('READ MORE', style: TextStyle(color: Colors.white),),
+                    SizedBox(height: 30,),
                   ],
                 ),
               )
